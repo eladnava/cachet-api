@@ -1,9 +1,9 @@
 # cachet-api
 [![npm version](https://badge.fury.io/js/cachet-api.svg)](https://www.npmjs.com/package/cachet-api)
 
-A Node.js API client for [Cachet](https://cachethq.io/), the open source status page system.
+A Node.js API client for [Cachet](https://cachethq.io/).
 
-> [Cachet](https://github.com/cachethq/cachet) is a beautiful and powerful open source status page system, a free replacement to services such as StatusPage.io, Status.io and others.
+> [Cachet](https://cachethq.io/) is a beautiful and powerful open source status page system, a free replacement to services such as StatusPage.io, Status.io and others.
 
 ## Usage
 
@@ -27,9 +27,9 @@ var cachet = new CachetAPI({
 });
 ```
 
-Make sure to fill in your Cachet service page `url` as well as your Cachet admin account's `apiKey`, which you can find in the [Cachet dashboard](https://docs.cachethq.io/docs/api-authentication#api-token). 
+Make sure to fill in your Cachet status page `url` as well as your Cachet admin account's `apiKey`, which you can find in the [Cachet dashboard](https://docs.cachethq.io/docs/api-authentication#api-token). 
 
-### Report an Incident
+## Report an Incident
 
 Use `cachet.reportIncident(incident)` to report a new status incident:
 
@@ -63,7 +63,7 @@ cachet.reportIncident(incident)
     });
 ```
 
-### Publish a Metric Point
+## Publish a Metric Point
 
 Use `cachet.publishMetricPoint(point)` to publish a new metric point to an existing metric:
 
