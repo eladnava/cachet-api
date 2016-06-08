@@ -1,3 +1,4 @@
+var util = require('util');
 var request = require('request');
 var Promise = require('bluebird');
 var statusCodes = require('./util/statusCodes');
@@ -74,13 +75,8 @@ CachetAPI.prototype.publishMetricPoint = function (metricPoint) {
 
         // Execute request
         request(req, function (err, res, body) {
-            // Handle errors by rejecting the promise
-            if (err) {
-                return reject(err);
-            }
-
-            // Resolve promise with request body
-            resolve(body);
+            // Handle the response accordingly
+            handleResponse(err, res, body, reject, resolve);
         });
     });
 };
@@ -135,16 +131,33 @@ CachetAPI.prototype.reportIncident = function (incident) {
 
         // Execute request
         request(req, function (err, res, body) {
-            // Handle errors by rejecting the promise
-            if (err) {
-                return reject(err);
-            }
-
-            // Resolve promise with request body
-            resolve(body);
+            // Handle the response accordingly
+            handleResponse(err, res, body, reject, resolve);
         });
     });
 };
+
+function handleResponse(err, res, body, reject, resolve) {
+    // Handle errors by rejecting the promise
+    if (err) {
+        return reject(err);
+    }
+
+    // Error(s) returned?
+    if (body.errors) {
+        // Stringify and reject promise
+        return reject(new Error(util.inspect(body.errors)));
+    }
+
+    // Require 200 OK for success
+    if (res.statusCode != 200) {
+        // Throw generic error
+        return reject(new Error('An invalid response code was returned from the API: ' + res.statusCode));
+    }
+
+    // Resolve promise with request body
+    resolve(body);
+}
 
 // Expose the class object
 module.exports = CachetAPI;
