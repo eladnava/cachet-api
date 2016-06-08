@@ -15,7 +15,7 @@ var metricPoint = {
     id: 1,
     // Metric point value
     value: 3.37,
-    // Metric point timestamp
+    // Metric point timestamp (optional, defaults to now)
     timestamp: Math.round(new Date().getTime() / 1000)
 };
 
