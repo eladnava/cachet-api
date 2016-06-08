@@ -1,0 +1,23 @@
+{
+  "name": "cachet-api",
+  "version": "1.0.0",
+  "description": "An API client for Cachet, the open source status page system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eladnava/cachet-api.git"
+  },
+  "author": "Elad Nava <eladnava@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/eladnava/cachet-api/issues"
+  },
+  "homepage": "https://github.com/eladnava/cachet-api#readme",
+  "dependencies": {
+    "bluebird": "^3.4.0",
+    "request": "^2.72.0"
+  }
+}
