@@ -29,6 +29,25 @@ var cachet = new CachetAPI({
 
 Make sure to fill in your Cachet status page `url` as well as your Cachet admin account's `apiKey`, which you can find in the [Cachet dashboard](https://docs.cachethq.io/docs/api-authentication#api-token). 
 
+## Get Component Info
+
+Use `cachet.getComponentById(id)` to fetch details about an existing component:
+
+```js
+// Prepare a component ID to fetch
+var componentId = 1;
+
+// Get component info by ID
+cachet.getComponentById(componentId)
+    .then(function (component) {
+        // Log component info
+        console.log('Component', component);
+    }).catch(function (err) {
+        // Log errors to console
+        console.log('Fatal Error', err);
+    });
+```
+
 ## Publish a Metric Point
 
 Use `cachet.publishMetricPoint(point)` to publish a new metric point to an existing metric:
