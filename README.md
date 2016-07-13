@@ -29,6 +29,32 @@ var cachet = new CachetAPI({
 
 Make sure to fill in your Cachet status page `url` as well as your Cachet admin account's `apiKey`, which you can find in the [Cachet dashboard](https://docs.cachethq.io/docs/api-authentication#api-token). 
 
+## Publish a Metric Point
+
+Use `cachet.publishMetricPoint(point)` to publish a new metric point to an existing metric:
+
+```js
+// Prepare a metric point to publish (so it shows up on the metric's graph)
+var metricPoint = {
+    // Metric ID
+    id: 1,
+    // Metric point value
+    value: 3.37,
+    // Metric point timestamp (optional, defaults to now)
+    timestamp: Math.round(new Date().getTime() / 1000)
+};
+
+// Publish it so it shows up on the status page
+cachet.publishMetricPoint(metricPoint)
+    .then(function (response) {
+        // Log API response
+        console.log('Metric point published at ' + response.data.created_at);
+    }).catch(function (err) {
+        // Log errors to console
+        console.log('Fatal Error', err);
+    });
+```
+
 ## Report an Incident
 
 Use `cachet.reportIncident(incident)` to report a new status incident:
@@ -57,32 +83,6 @@ cachet.reportIncident(incident)
     .then(function (response) {
         // Log API response
         console.log('New incident reported at ' + response.data.created_at);
-    }).catch(function (err) {
-        // Log errors to console
-        console.log('Fatal Error', err);
-    });
-```
-
-## Publish a Metric Point
-
-Use `cachet.publishMetricPoint(point)` to publish a new metric point to an existing metric:
-
-```js
-// Prepare a metric point to publish (so it shows up on the metric's graph)
-var metricPoint = {
-    // Metric ID
-    id: 1,
-    // Metric point value
-    value: 3.37,
-    // Metric point timestamp (optional, defaults to now)
-    timestamp: Math.round(new Date().getTime() / 1000)
-};
-
-// Publish it so it shows up on the status page
-cachet.publishMetricPoint(metricPoint)
-    .then(function (response) {
-        // Log API response
-        console.log('Metric point published at ' + response.data.created_at);
     }).catch(function (err) {
         // Log errors to console
         console.log('Fatal Error', err);
