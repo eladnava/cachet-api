@@ -61,7 +61,7 @@ CachetAPI.prototype.publishMetricPoint = function (metricPoint) {
         }
 
         // Check for missing metric value
-        if (!metricPoint.value) {
+        if (metricPoint.value === null) {
             return reject(new Error('Please provide the metric point value.'));
         }
 
