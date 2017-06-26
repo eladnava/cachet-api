@@ -159,9 +159,7 @@ CachetAPI.prototype.getComponentById = function (id) {
         // Execute request
         request(req, function (err, res, body) {
             // Extract data object from body if it exists
-            if (body) {
-                body = (body.data) ? body.data : body;
-            }
+            body = (body && body.data) ? body.data : body;
 
             // Handle the response accordingly
             handleResponse(err, res, body, reject, resolve);
