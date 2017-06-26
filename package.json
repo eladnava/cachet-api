@@ -1,6 +1,6 @@
 {
   "name": "cachet-api",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "An API client for Cachet, the open source status page system.",
   "main": "index.js",
   "scripts": {
