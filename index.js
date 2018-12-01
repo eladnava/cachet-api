@@ -98,7 +98,7 @@ CachetAPI.prototype.reportIncident = function (incident) {
         }
 
         // Check for required parameters
-        if (!incident.name || !incident.message || !incident.status || !incident.visible) {
+        if (!incident.name || !incident.message || !incident.status || incident.visible === undefined) {
             return reject(new Error('Please provide the incident name, message, status, and visibility.'));
         }
 
