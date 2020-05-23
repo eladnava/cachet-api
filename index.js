@@ -39,7 +39,7 @@ function CachetAPI(options) {
     };
     
     // Use ca certificate if one is provided
-    this.ca = (options.ca ? options.ca : '');    
+    this.ca = options.ca || null;
 }
 
 CachetAPI.prototype.publishMetricPoint = function (metricPoint) {
