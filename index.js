@@ -37,6 +37,9 @@ function CachetAPI(options) {
         // Cachet API authentication header
         'X-Cachet-Token': options.apiKey
     };
+    
+    // Use ca certificate if one is provided
+    this.ca = (options.ca ? options.ca : '');    
 }
 
 CachetAPI.prototype.publishMetricPoint = function (metricPoint) {
@@ -70,7 +73,8 @@ CachetAPI.prototype.publishMetricPoint = function (metricPoint) {
             method: 'POST',
             json: metricPoint,
             headers: that.headers,
-            url: that.url + '/metrics/' + metricPoint.id + '/points'
+            url: that.url + '/metrics/' + metricPoint.id + '/points',
+            ca: that.ca
         };
 
         // Execute request
@@ -126,7 +130,8 @@ CachetAPI.prototype.reportIncident = function (incident) {
             method: 'POST',
             json: incident,
             headers: that.headers,
-            url: that.url + '/incidents'
+            url: that.url + '/incidents',
+            ca: that.ca
         };
 
         // Execute request
@@ -153,7 +158,8 @@ CachetAPI.prototype.getComponentById = function (id) {
             method: 'GET',
             json: true,
             headers: that.headers,
-            url: that.url + '/components/' + id
+            url: that.url + '/components/' + id,
+            ca: that.ca
         };
 
         // Execute request
