@@ -123,7 +123,7 @@ cachet.deleteIncidentById(incidentId)
 	});
 ```
 
-## Get Incidents by Component Id
+## Get Incidents by Component ID
 
 Use `cachet.getIncidentsByComponentId(componentId)` to fetch all incidents associated with the provided component:
 
