@@ -108,6 +108,36 @@ cachet.reportIncident(incident)
     });
 ```
 
+## Delete an Incident
+
+Use `cachet.deleteIncidentById(id)` to delete an existing status incident:
+
+```js
+cachet.deleteIncidentById(incidentId)
+	.then(function (response) {
+		// Log API response
+		console.log('Incident successfully deleted');
+	}).catch(function (err) {
+		// Log errors to console
+		console.log('Fatal Error', err);
+	});
+```
+
+## Get Incidents by Component Id
+
+Use `cachet.getIncidentsByComponentId(componentId)` to fetch all incidents associated with the provided component:
+
+```js
+cachet.getIncidentsByComponentId(componentId)
+	.then(function (incidents) {
+		// Log API response
+		console.log('Incidents successfully fetched', incidents);
+	}).catch(function (err) {
+		// Log errors to console
+		console.log('Fatal Error', err);
+	});
+```
+
 ## License
 
 Apache 2.0

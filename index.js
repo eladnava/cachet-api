@@ -142,6 +142,65 @@ CachetAPI.prototype.reportIncident = function (incident) {
     });
 };
 
+CachetAPI.prototype.deleteIncidentById = function (id) {
+    // Dirty hack
+    var that = this;
+
+    // Return a promise
+    return new Promise(function (resolve, reject) {
+        // No incident id provided?
+        if (!id) {
+            return reject(new Error('Please provide the id of the incident to delete.'));
+        }
+		
+        // Prepare API request
+        var req = {
+            method: 'DELETE',
+            headers: that.headers,
+            url: that.url + '/incidents/' + id,
+            ca: that.ca
+        };
+
+        // Execute request
+        request(req, function (err, res, body) {
+            // Handle the response accordingly
+            handleResponse(err, res, body, reject, resolve);
+        });
+    });
+};
+
+CachetAPI.prototype.getIncidentsByComponentId = function (id) {
+    // Dirty hack
+    var that = this;
+
+    // Return a promise
+    return new Promise(function (resolve, reject) {
+        // No component ID provided?
+        if (!id) {
+            return reject(new Error('Please provide the component ID of the incidents to fetch.'));
+        }
+
+        // Prepare API request
+        var req = {
+            method: 'GET',
+            json: true,
+            headers: that.headers,
+            url: that.url + '/incidents?component_id=' + id,
+            ca: that.ca
+        };
+
+        // Execute request
+        request(req, function (err, res, body) {
+            // Extract data object from body if it exists
+            body = (body && body.data) ? body.data : body;
+
+            // Handle the response accordingly
+            handleResponse(err, res, body, reject, resolve);
+        });
+    });
+};
+
+
 CachetAPI.prototype.getComponentById = function (id) {
     // Dirty hack
     var that = this;
@@ -186,7 +245,7 @@ function handleResponse(err, res, body, reject, resolve) {
     }
 
     // Require 200 OK for success
-    if (res.statusCode != 200) {
+    if (res.statusCode != 200 && res.statusCode != 204) {
         // Throw generic error
         return reject(new Error('An invalid response code was returned from the API: ' + res.statusCode));
     }
