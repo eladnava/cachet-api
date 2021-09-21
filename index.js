@@ -6,7 +6,9 @@ var statusCodes = require('./util/statusCodes');
 // Internal package configuration
 var config = {
     // Supported Cachet API version
-    apiVersion: 1
+    apiVersion: 1,
+    // Default timeout of 5 seconds for each request to the Cachet API
+    timeout: 5000
 };
 
 // Package constructor
@@ -71,6 +73,7 @@ CachetAPI.prototype.publishMetricPoint = function (metricPoint) {
         // Prepare API request
         var req = {
             method: 'POST',
+            timeout: config.timeout,
             json: metricPoint,
             headers: that.headers,
             url: that.url + '/metrics/' + metricPoint.id + '/points',
@@ -128,6 +131,7 @@ CachetAPI.prototype.reportIncident = function (incident) {
         // Prepare API request
         var req = {
             method: 'POST',
+            timeout: config.timeout,
             json: incident,
             headers: that.headers,
             url: that.url + '/incidents',
@@ -156,6 +160,7 @@ CachetAPI.prototype.deleteIncidentById = function (id) {
         // Prepare API request
         var req = {
             method: 'DELETE',
+            timeout: config.timeout,
             headers: that.headers,
             url: that.url + '/incidents/' + id,
             ca: that.ca
@@ -184,6 +189,7 @@ CachetAPI.prototype.getIncidentsByComponentId = function (id) {
         var req = {
             method: 'GET',
             json: true,
+            timeout: config.timeout,
             headers: that.headers,
             url: that.url + '/incidents?component_id=' + id,
             ca: that.ca
@@ -216,6 +222,7 @@ CachetAPI.prototype.getComponentById = function (id) {
         var req = {
             method: 'GET',
             json: true,
+            timeout: config.timeout,
             headers: that.headers,
             url: that.url + '/components/' + id,
             ca: that.ca
