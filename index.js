@@ -39,6 +39,9 @@ function CachetAPI(options) {
         // Cachet API authentication header
         'X-Cachet-Token': options.apiKey
     };
+
+    // Set timeout to value passed in or default to config.timeout
+    this.timeout = options.timeout || config.timeout;
     
     // Use ca certificate if one is provided
     this.ca = options.ca || null;
@@ -73,7 +76,7 @@ CachetAPI.prototype.publishMetricPoint = function (metricPoint) {
         // Prepare API request
         var req = {
             method: 'POST',
-            timeout: config.timeout,
+            timeout: that.timeout,
             json: metricPoint,
             headers: that.headers,
             url: that.url + '/metrics/' + metricPoint.id + '/points',
@@ -131,7 +134,7 @@ CachetAPI.prototype.reportIncident = function (incident) {
         // Prepare API request
         var req = {
             method: 'POST',
-            timeout: config.timeout,
+            timeout: that.timeout,
             json: incident,
             headers: that.headers,
             url: that.url + '/incidents',
@@ -160,7 +163,7 @@ CachetAPI.prototype.deleteIncidentById = function (id) {
         // Prepare API request
         var req = {
             method: 'DELETE',
-            timeout: config.timeout,
+            timeout: that.timeout,
             headers: that.headers,
             url: that.url + '/incidents/' + id,
             ca: that.ca
@@ -189,7 +192,7 @@ CachetAPI.prototype.getIncidentsByComponentId = function (id) {
         var req = {
             method: 'GET',
             json: true,
-            timeout: config.timeout,
+            timeout: that.timeout,
             headers: that.headers,
             url: that.url + '/incidents?component_id=' + id,
             ca: that.ca
@@ -206,7 +209,6 @@ CachetAPI.prototype.getIncidentsByComponentId = function (id) {
     });
 };
 
-
 CachetAPI.prototype.getComponentById = function (id) {
     // Dirty hack
     var that = this;
@@ -222,7 +224,7 @@ CachetAPI.prototype.getComponentById = function (id) {
         var req = {
             method: 'GET',
             json: true,
-            timeout: config.timeout,
+            timeout: that.timeout,
             headers: that.headers,
             url: that.url + '/components/' + id,
             ca: that.ca
