@@ -20,7 +20,7 @@ exports.getIncidentStatusCode = function (name) {
     var code = incidentStatuses[name];
 
     // Bad name?
-    if (code === undefined) {
+    if (code === undefined || code === null) {
         throw new Error('Invalid incident status provided: ' + name);
     }
 
